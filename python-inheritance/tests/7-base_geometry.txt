@@ -10,27 +10,23 @@ Testing area():
     ...
     Exception: area() is not implemented
 
-Testing integer_validator():
+Testing integer_validator() with valid integers:
     >>> bg.integer_validator("my_int", 12)
     >>> bg.integer_validator("width", 89)
+    >>> bg.integer_validator("age", 1)
 
-Testing integer_validator with "age" and various types:
-    >>> bg.integer_validator("age", "4")
+Testing integer_validator() with "age" (TypeError):
+    >>> bg.integer_validator("age", "20")
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+    >>> bg.integer_validator("age", [1, 2])
     Traceback (most recent call last):
     ...
     TypeError: age must be an integer
 
     >>> bg.integer_validator("age", (4,))
-    Traceback (most recent call last):
-    ...
-    TypeError: age must be an integer
-
-    >>> bg.integer_validator("age", [3])
-    Traceback (most recent call last):
-    ...
-    TypeError: age must be an integer
-
-    >>> bg.integer_validator("age", True)
     Traceback (most recent call last):
     ...
     TypeError: age must be an integer
@@ -45,7 +41,17 @@ Testing integer_validator with "age" and various types:
     ...
     TypeError: age must be an integer
 
-Testing integer_validator with invalid values:
+    >>> bg.integer_validator("age", True)
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+    >>> bg.integer_validator("age", 3.14)
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+Testing integer_validator() with "age" (ValueError):
     >>> bg.integer_validator("age", 0)
     Traceback (most recent call last):
     ...
