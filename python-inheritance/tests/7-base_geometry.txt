@@ -4,17 +4,49 @@ The ``BaseGeometry`` class
     >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
     >>> bg = BaseGeometry()
 
-Testing integer_validator():
+Testing area():
+    >>> bg.area()
+    Traceback (most recent call last):
+    ...
+    Exception: area() is not implemented
+
+Testing integer_validator() with valid integers:
     >>> bg.integer_validator("my_int", 12)
     >>> bg.integer_validator("width", 89)
+    >>> bg.integer_validator("age", 1)
 
-Testing integer_validator("age") with non-integer:
+Testing integer_validator() with "age" (TypeError):
     >>> bg.integer_validator("age", "20")
     Traceback (most recent call last):
     ...
     TypeError: age must be an integer
 
-    >>> bg.integer_validator("age", [1, 2, 3])
+    >>> bg.integer_validator("age", [1, 2])
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+    >>> bg.integer_validator("age", (4,))
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+    >>> bg.integer_validator("age", {3, 4})
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+    >>> bg.integer_validator("age", {'a': 1})
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+    >>> bg.integer_validator("age", None)
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+    >>> bg.integer_validator("age", True)
     Traceback (most recent call last):
     ...
     TypeError: age must be an integer
@@ -24,7 +56,7 @@ Testing integer_validator("age") with non-integer:
     ...
     TypeError: age must be an integer
 
-Testing integer_validator("age") with invalid values:
+Testing integer_validator() with "age" (ValueError):
     >>> bg.integer_validator("age", 0)
     Traceback (most recent call last):
     ...
@@ -34,10 +66,3 @@ Testing integer_validator("age") with invalid values:
     Traceback (most recent call last):
     ...
     ValueError: age must be greater than 0
-
-Testing area():
-    >>> bg.area()
-    Traceback (most recent call last):
-    ...
-    Exception: area() is not implemented
-
